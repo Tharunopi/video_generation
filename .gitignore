@@ -1,3 +1,6 @@
 .venv
 .env
 .qodo
+__pycache__/
+.langgraph_api
+Models

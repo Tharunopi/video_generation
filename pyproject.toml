@@ -6,9 +6,12 @@ readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "dotenv>=0.9.9",
+    "google-genai>=1.52.0",
     "langchain>=1.0.7",
     "langchain-google-community>=3.0.1",
     "langchain-google-genai>=3.0.3",
     "langgraph-cli[inmem]>=0.4.7",
+    "pillow>=12.0.0",
+    "pollinations>=4.5.1",
     "pydantic>=2.12.4",
 ]

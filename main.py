@@ -1,6 +1,3 @@
-def main():
-    print("Hello from video-generation!")
+from Helpers.workflow import get_compiled_graph
 
-
-if __name__ == "__main__":
-    main()
+graph = get_compiled_graph()
