@@ -10,3 +10,9 @@ class AgentState(TypedDict):
     is_approved_image_prompt: bool
     revision_count_scenes: int
     revision_count_image_prompt: int
+
+    images: List
+    images_to_eval: List
+    images_to_regen: List
+    image_generation_count: int
+    eval_image: List

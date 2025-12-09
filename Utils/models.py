@@ -41,3 +41,12 @@ class Models:
         except Exception as e:
             print(f"{__name__}: {e}")
             return None
+        
+    @staticmethod
+    def eval_image(model:str="gemini-2.5-flash", temperature:float=0.7, **kwargs) -> ChatGoogleGenerativeAI | None:
+        try:
+            return ChatGoogleGenerativeAI(model=model, api_key=api_key, temperature=temperature, **kwargs)
+
+        except Exception as e:
+            print(f"{__name__}: {e}")
+            return None

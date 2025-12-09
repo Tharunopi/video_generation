@@ -1,0 +1,10 @@
+project: my-awesome-kernel
+kernel_slug: tharunatithya/my-awesome-kernel
+code_file: Practcising\image_generation.ipynb
+accelerator: none
+internet: false
+privacy: private
+datasets: []
+competitions: []
+outputs:
+  download_to: .kaggle-outputs/

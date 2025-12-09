@@ -20,6 +20,10 @@ class evalReportImagePrompt(BaseModel):
     is_approved_image_prompt: bool = Field(description="Boolean value used to define whether the scenes are approved or not")
     correction: str = Field(description="Contains the feedback to improve scenes.")
 
+class evalReportImage(BaseModel):
+    is_approved_image: bool = Field(description="Boolean value used to define whether the image are approved or not")
+    corrected_imageprompt: str = Field(description="Contains corrected image prompt if image is not approved.")
+
 class characterConsistenyModel(BaseModel):
     identity_tags: List[str] = Field(description="Short factual phrases that describe persistent character attributes (face marks, hair style, clothing details). Use concise, repeatable tags.")
     style_lock: str = Field(description="Short instruction to lock or strongly prefer the same overall art style across outputs (e.g., painterly warm-tone).")
