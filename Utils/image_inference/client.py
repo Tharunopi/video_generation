@@ -3,7 +3,7 @@ import io, base64, requests
 from dotenv import load_dotenv
 
 load_dotenv()
-url = "https://9badd4dfc96d.ngrok-free.app"
+url = "https://eb5f171739f1.ngrok-free.app"
 
 def generate_image(prompt:str, negative_prompt:str, num_inference_steps:int=8, height:int=512, width:int=512, guidance_scale:float=0.0):
     response = requests.post(

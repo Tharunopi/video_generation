@@ -1,40 +1,30 @@
 from langchain_core.prompts import PromptTemplate
 
 def get_template(image_prompt:str) -> PromptTemplate:
-    eval_prompt = """Evaluate this image based on the following criteria:
+    eval_prompt = """You are a Quality Assurance Specialist for AI Imagery.
+    
+                    **Goal:** Evaluate if the generated image strictly matches the intended prompt and meets professional quality standards.
 
-                    **Your task:** Determine if this image looks natural and realistic, or if it appears AI-generated.
-
+                    **Intended Prompt (Ground Truth):**
                     {image_prompt}
 
-                    **Look for these signs of AI generation (RED FLAGS):**
-                    - Unnatural skin texture (too smooth, plastic-like, or waxy appearance)
-                    - Strange hands or fingers (wrong number, odd positioning, merged digits)
-                    - Inconsistent lighting or shadows that don't match the scene
-                    - Blurry or distorted details, especially in the background
-                    - Odd facial features (asymmetrical eyes, unnatural teeth, strange ears)
-                    - Text or writing that is gibberish or malformed
-                    - Repeating patterns that don't make logical sense
-                    - Objects that blend unnaturally into each other
-                    - Impossible reflections or perspectives
-                    - Overly perfect symmetry or composition that feels artificial
-
-                    **Signs of natural/authentic images (GOOD SIGNS):**
-                    - Realistic skin pores, texture, and imperfections
-                    - Natural lighting with consistent shadows
-                    - Coherent background details that make sense
-                    - Proper hand and finger anatomy
-                    - Authentic facial expressions and proportions
-                    - Real-world "messiness" (dust, wear, natural disorder)
-                    - Consistent depth of field and focus
+                    **Evaluation Steps:**
+                    1. **Prompt Fidelity:** Does the image actually show what was asked? (e.g., if prompt says "red hat", is there a red hat?)
+                    2. **Realism/Style Adherence:** Does the style match the requested art direction (e.g., Cinematic, 3D Render)?
+                    3. **Anatomy & Physics:** Check for hands, limbs, gravity, and reflections.
+                    4. **Artifacts:** Check for "glitching", random floating objects, or garbled text.
+                    
+                    **Critical Fail Conditions (Automatic FAIL):**
+                    - [ ] Extra or missing limbs on humans/animals.
+                    - [ ] Severe facial distortion (unless specified as horror).
+                    - [ ] Visible text/watermarks when none were requested.
+                    - [ ] Blurry main subject.
 
                     **Provide your evaluation in this format:**
-                    1. **Overall Assessment:** Does this look AI-generated or natural? (Natural/AI-Generated/Uncertain)
-                    2. **Confidence Level:** How confident are you? (High/Medium/Low)
-                    3. **Key Observations:** List 3-5 specific details that support your assessment
-                    4. **Final Verdict:** PASS or FAIL (PASS = looks natural, FAIL = looks AI-generated)
-
-                    Be strict in your evaluation. When in doubt, lean towards FAIL."""
+                    1. **Score (1-10):** <score>
+                    2. **Missing Elements:** <list any prompt details missing from image>
+                    3. **Unwanted Elements:** <list any artifacts or hallucinations>
+                    4. **Final Verdict:** "PASS" (if Score >= 8) or "FAIL" (if Score < 8)."""
     template = PromptTemplate.from_template(eval_prompt).format(image_prompt=image_prompt)
 
     return template

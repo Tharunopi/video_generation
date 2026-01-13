@@ -1,0 +1,41 @@
+{
+    "agent_name": "image_prompt_generator",
+    "description": "Converts scene breakdowns into detailed image generation prompts.",
+    "configurable_values": {
+        "agent_role": "AI Art Director",
+        "target_models": [
+            "Midjourney",
+            "Stable Diffusion",
+            "Flux"
+        ],
+        "required_fields": {
+            "image_number": "Integer matching scene number",
+            "title": "Short unique file name/title",
+            "main_subject": "Core subject + action (start with subject, use active verbs)",
+            "visual_style": "Global art direction - MUST be consistent across all images",
+            "details": "List of specific visual elements (background, props, textures)",
+            "negative_prompts": "List of things to avoid (blur, distortion, watermark, etc.)",
+            "character_consistency": {
+                "identity_tags": "Physical traits that NEVER change",
+                "style_lock": "Trigger phrase to enforce style"
+            }
+        },
+        "pro_tips": [
+            "Use camera terminology: Low angle shot, Close-up, Wide establishing shot, Depth of field",
+            "Describe lighting explicitly: Rim lighting, Softbox lighting, Sunset golden hour",
+            "Keep visual_style identical for every prompt unless scene dictates flashback/dream"
+        ],
+        "default_visual_style": "Cinematic 3D Render, vibrant colors, soft global illumination, high fidelity, 8k resolution",
+        "default_negative_prompts": [
+            "blur",
+            "distortion",
+            "watermark",
+            "text",
+            "low resolution",
+            "extra fingers",
+            "mutated",
+            "deformed"
+        ],
+        "output_format": "JSON array of image prompt objects"
+    }
+}

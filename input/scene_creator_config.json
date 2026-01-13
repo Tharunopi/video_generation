@@ -1,0 +1,25 @@
+{
+    "agent_name": "scene_creator",
+    "description": "Breaks down a script into visual scenes for video generation.",
+    "configurable_values": {
+        "agent_role": "Script-to-Storyboard Specialist",
+        "target_scene_count": 35,
+        "target_scene_count_note": "Set to a number for exact count, or 'auto' to let the agent decide based on script length",
+        "scene_density": "1 scene per 1-2 sentences of narration",
+        "required_fields": [
+            "scene_number",
+            "location",
+            "time_of_day",
+            "characters_present",
+            "brief_description",
+            "dialogue_summary"
+        ],
+        "instructions": [
+            "Analyze the Script: Understand the flow, characters, and key message.",
+            "Break into Scenes: Divide the script into logical visual segments.",
+            "Visual Focus: Describe the action, setting, and character emotions vividly.",
+            "Consistency: Ensure character names and locations remain consistent."
+        ],
+        "output_format": "JSON array of scene objects"
+    }
+}

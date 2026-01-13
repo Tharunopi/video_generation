@@ -2,66 +2,44 @@ from langchain_core.prompts import PromptTemplate
 from typing import List
 
 def get_template(scenes: List) -> str:
-    prompt = """You are an expert at creating structured image generation prompts for AI image models.
-
-                Given the following scene breakdown, create a detailed image prompt for EACH scene following this exact structure:
-
-                Scenes:
+    prompt = """You are an expert AI Art Director. Your goal is to translate a storyboard into a set of highly detailed, production-ready image generation prompts.
+    
+                **Input Scenes:**
                 {scenes}
 
-                For each scene, you must create an ImagePromptModel with these fields:
+                **Task:**
+                Create a detailed `ImagePromptModel` for EACH scene. The prompts must be optimized for high-quality diffusion models (like Midjourney, Stable Diffusion, or Flux).
 
-                1. **image_number**: Sequential number (1, 2, 3...)
+                **Required Fields for Each Image:**
 
-                2. **title**: Short descriptive title (<= 60 chars)
-                - Example: "Sarah Working Alone at Coffee Shop"
+                1. **image_number**: (Integer) Matching the scene number.
+                2. **title**: (String) Short, unique file name/title.
+                3. **main_subject**: (String) The core subject + action.
+                   - *Rule*: Start with the subject. Use active verbs.
+                   - *Example*: "A weary firefighter resting on the bumper of the truck."
 
-                3. **main_subject**: One clear sentence describing who/what and their action
-                - Focus on IDENTITY and ACTION, not style
-                - Example: "Young woman typing intensely on laptop at corner table"
+                4. **visual_style**: (String) The global art direction.
+                   - *Critical*: This string MUST be consistent across ALL images to ensure the video looks cohesive.
+                   - Define: Medium (e.g., "Cinematic 3D Render"), Lighting (e.g., "Volumetric morning light"), and Color Palette.
+                   - *Example*: "Pixar-style 3D animation, vibrant colors, soft global illumination, high fidelity, 8k resolution."
 
-                4. **visual_style**: Art direction combining medium, camera, lighting, mood
-                - Include: medium type (photo-realistic, cinematic, etc.)
-                - Camera details: lens type, angle, shot composition
-                - Lighting: quality, direction, time of day
-                - Mood: emotional tone, color palette
-                - Example: "Cinematic photo-realistic, 35mm film, medium shot from slight overhead angle, soft morning sunlight streaming through windows, warm golden hour lighting, amber and cream color palette, shallow depth of field, moody and tense atmosphere"
+                5. **details**: (List[str]) Specific visual elements to populate the frame.
+                   - Include: Background elements, props, textures, weather effects.
+                   - *Example*: ["puddles on the ground", "neon sign reflecting in water", "rust texture on metal", "dense fog"]
 
-                5. **details**: List of specific visual attributes (5-10 items)
-                - Character appearance details
-                - Clothing descriptions
-                - Props and objects
-                - Environment/background specifics
-                - Spatial relationships
-                - Example: ["casual business attire", "laptop with glowing screen", "wooden table surface", "coffee cup nearby", "large windows in background", "urban coffee shop interior", "morning sunlight rays", "blurred background with cafe customers"]
+                6. **negative_prompts**: (List[str]) What to avoid.
+                   - *Example*: ["blur", "distortion", "watermark", "text", "low resolution", "extra fingers", "mutated"]
 
-                6. **negative_prompts**: List of things to avoid (5-10 items)
-                - Common AI artifacts
-                - Quality issues
-                - Unwanted elements
-                - Example: ["text", "watermark", "blurry", "low quality", "deformed hands", "extra limbs", "distorted face", "unrealistic proportions", "oversaturated", "anime style"]
+                7. **character_consistency**: (Object)
+                   - **identity_tags**: (List[str]) Physical traits that NEVER change (e.g., "red scarf", "scar on left cheek", "blue robot").
+                   - **style_lock**: (String) A short trigger phrase to enforce style (e.g., "in the style of Anime").
 
-                7. **character_consistency**: Object with two sub-fields:
-                
-                a. **identity_tags**: List of persistent character attributes (3-7 tags)
-                    - Physical features that stay consistent
-                    - Clothing style markers
-                    - Distinctive characteristics
-                    - Example: ["shoulder-length brown hair", "green eyes", "slim build", "navy blazer", "silver necklace", "focused expression"]
-                
-                b. **style_lock**: One instruction for consistent art style
-                    - Locks the overall visual treatment
-                    - Example: "cinematic photo-realistic with warm natural lighting and film grain"
+                **Pro Tips for Better Images:**
+                - Use camera terminology (e.g., "Low angle shot," "Close-up," "Wide establishing shot", "Depth of field").
+                - Describe lighting explicitly (e.g., "Rim lighting," "Softbox lighting," "Sunset golden hour").
+                - Keep the `visual_style` identical for every single prompt unless the scene dictates a flashback/dream.
 
-                IMPORTANT GUIDELINES:
-                - Keep identity_tags factual and repeatable across scenes
-                - Make main_subject action-focused, not style-focused
-                - visual_style should be consistent across all scenes for the same project
-                - details should be specific noun-phrases, not full sentences
-                - negative_prompts should target common AI generation issues
-                - character_consistency helps maintain same character appearance across multiple images
-
-                Return the data as a JSON array of image prompt objects."""
+                Return the output as a JSON array."""
     
     template = PromptTemplate.from_template(prompt).format(scenes=scenes)
 

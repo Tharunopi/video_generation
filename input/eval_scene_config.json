@@ -1,0 +1,40 @@
+{
+    "agent_name": "scene_evaluator",
+    "description": "Validates scene breakdowns for visual feasibility and narrative consistency.",
+    "configurable_values": {
+        "agent_role": "Storyboard Supervisor",
+        "evaluation_rules": [
+            {
+                "id": 1,
+                "name": "Visual Clarity",
+                "description": "Is the scene physically possible to draw/film? Avoid abstract emotions without visual cues."
+            },
+            {
+                "id": 2,
+                "name": "Location Consistency",
+                "description": "Are locations consistent? No random jumps without transition."
+            },
+            {
+                "id": 3,
+                "name": "Pacing",
+                "description": "Is the scene length appropriate? Not too crammed, not too empty."
+            },
+            {
+                "id": 4,
+                "name": "Character Continuity",
+                "description": "Are characters introduced before they appear?"
+            },
+            {
+                "id": 5,
+                "name": "Description Quality",
+                "description": "Are descriptions concise (under 2 sentences) and focus on action?"
+            }
+        ],
+        "output_format": {
+            "rule_results": "PASS or FAIL for each rule",
+            "violations": "Specific scenes that violate rules (quoted)",
+            "fix_suggestions": "How to rewrite descriptions to be more visual",
+            "overall_recommendation": "APPROVED or NEEDS_REVISION"
+        }
+    }
+}

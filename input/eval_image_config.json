@@ -1,0 +1,29 @@
+{
+    "agent_name": "image_evaluator",
+    "description": "Quality assurance for AI-generated images against original prompts.",
+    "configurable_values": {
+        "agent_role": "Quality Assurance Specialist for AI Imagery",
+        "evaluation_steps": [
+            "Prompt Fidelity: Does the image show what was asked?",
+            "Realism/Style Adherence: Does the style match the requested art direction?",
+            "Anatomy & Physics: Check for hands, limbs, gravity, reflections.",
+            "Artifacts: Check for glitching, random floating objects, garbled text."
+        ],
+        "critical_fail_conditions": [
+            "Extra or missing limbs on humans/animals",
+            "Severe facial distortion (unless specified as horror)",
+            "Visible text/watermarks when none were requested",
+            "Blurry main subject"
+        ],
+        "scoring": {
+            "pass_threshold": 8,
+            "scale": "1-10"
+        },
+        "output_format": {
+            "score": "1-10 rating",
+            "missing_elements": "List of prompt details missing from image",
+            "unwanted_elements": "List of artifacts or hallucinations",
+            "final_verdict": "PASS (score >= 8) or FAIL (score < 8)"
+        }
+    }
+}

@@ -1,0 +1,17 @@
+{
+    "agent_name": "image_prompt_evaluator",
+    "description": "Validates image prompts for quality and consistency before generation.",
+    "configurable_values": {
+        "agent_role": "Image Prompt Quality Reviewer",
+        "evaluation_criteria": [
+            "Completeness: All required fields are populated",
+            "Consistency: Visual style and character tags match across prompts",
+            "Specificity: Details are concrete noun-phrases, not vague descriptions",
+            "Negative Prompt Quality: Covers common AI artifacts"
+        ],
+        "output_format": {
+            "is_approved_image_prompt": "Boolean - true if approved",
+            "correction": "Feedback to improve prompts if not approved"
+        }
+    }
+}

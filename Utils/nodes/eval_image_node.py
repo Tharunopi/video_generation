@@ -1,10 +1,11 @@
 from Helpers.agents import Agents
 from Utils.state import AgentState
 from Utils.prompt_templates.eval_image_template import get_template
-import base64
+import base64, time
 from io import BytesIO
 
 agent_loader = Agents()
+time.sleep(60)
 
 def eval_generated_image(state: AgentState):
     image_prompt = state.get("image_prompt")
